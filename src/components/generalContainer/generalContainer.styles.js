@@ -5,7 +5,8 @@ const StyledGeneralContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  padding: 20px;
+  min-height: 100vh;
 `;
 
 export { StyledGeneralContainer };

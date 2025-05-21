@@ -1,10 +1,9 @@
-import { Children } from 'react';
 import { StyledGeneralContainer } from './generalContainer.styles';
 
-const GeneralContainer = () => {
+const GeneralContainer = ({ children }) => {
   return (
     <>
-      <StyledGeneralContainer>{Children}</StyledGeneralContainer>
+      <StyledGeneralContainer>{children}</StyledGeneralContainer>
     </>
   );
 };

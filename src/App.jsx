@@ -1,14 +1,13 @@
-import Button from './button/Button';
 import { GlobalStyles } from './styles/GlobalStyles';
+import Form from './components/form/Form';
+import GeneralContainer from './components/generalContainer/GeneralContainer';
 
 const App = () => {
   return (
-    <>
+    <GeneralContainer>
       <GlobalStyles />
-      <h1>REACT</h1>
-      <Button color='lime' hoverColor='red' />
-      <Button color='orange' hoverColor='purple' />
-    </>
+      <Form />
+    </GeneralContainer>
   );
 };
 

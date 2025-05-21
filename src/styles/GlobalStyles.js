@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { COLORS } from './COLORS';
 
 export const GlobalStyles = createGlobalStyle`
     *,
@@ -29,6 +30,7 @@ export const GlobalStyles = createGlobalStyle`
 
     body {
     margin: 0;
-    font-family: sans-serif;
+    font-family: "Karla", sans-serif;
+    background-color:${COLORS.green200} ;
     }
 `;

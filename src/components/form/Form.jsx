@@ -11,14 +11,19 @@ import {
   StyledButton,
   StyledTitle
 } from './form.styles';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 
 const Form = () => {
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors }
   } = useForm();
+
+  // porque necesito watch aqui y no en los textos
+  const generalQuary = useWatch({ control, name: 'generalQuary' });
+  const supportRequest = useWatch({ control, name: 'supportRequest' });
 
   console.log(errors);
   return (
@@ -28,42 +33,97 @@ const Form = () => {
         <StyledInputContainer>
           First Name *
           <StyledInput
-            {...register('firstName', { required: 'This field is required' })}
+            {...register(
+              'firstName',
+              { required: 'This field is required' },
+              {
+                pattern: {
+                  value: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/,
+                  message: 'Invalid first name'
+                }
+              }
+            )}
             type='text'
           />
-          <span>{errors.firstName?.message}</span>
+          <span style={{ color: 'red', fontSize: '12px' }}>
+            {errors.firstName?.message}
+          </span>
         </StyledInputContainer>
         <StyledInputContainer>
           Last Name *
           <StyledInput
-            {...register('lastName', { required: 'This field is required' })}
+            {...register(
+              'lastName',
+              { required: 'This field is required' },
+              {
+                pattern: {
+                  value: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/,
+                  message: 'Invalid last name'
+                }
+              }
+            )}
             type='text'
           />
-          <span>{errors.lastName?.message}</span>
+          <span style={{ color: 'red', fontSize: '12px' }}>
+            {errors.lastName?.message}
+          </span>
         </StyledInputContainer>
         <StyledInputContainer>
           Email Address *
           <StyledInput
-            {...register('email', { required: 'Enter a valid email address' })}
+            {...register(
+              'email',
+              { required: 'Enter a valid email address' },
+              {
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: 'Invalid email address'
+                }
+              }
+            )}
             type='text'
           />
-          <span>{errors.email?.message}</span>
+          <span style={{ color: 'red', fontSize: '12px' }}>
+            {errors.email?.message}
+          </span>
         </StyledInputContainer>
         <StyledInputContainer>
           Query Type *
           <StyledQuaryContainer>
-            <StyledQuaryInput id='generalQuary' type='checkbox' />
+            <StyledQuaryInput
+              {...register('generalQuery')}
+              id='generalQuery'
+              type='checkbox'
+            />
             <StyledQuaryLabel htmlFor='generalQuery'>
               General Query
             </StyledQuaryLabel>
           </StyledQuaryContainer>
           <StyledQuaryContainer>
-            <StyledQuaryInput id='supportRequest' type='checkbox' />
+            <StyledQuaryInput
+              {...register('supportRequest')}
+              id='supportRequest'
+              type='checkbox'
+            />
             <StyledQuaryLabel htmlFor='supportRequest'>
               Support Request
             </StyledQuaryLabel>
           </StyledQuaryContainer>
+          {/* validar */}
+          <input
+            type='hidden'
+            {...register('queryType', {
+              validate: () =>
+                generalQuary || supportRequest || 'Please select a query type'
+            })}
+          />
+          {errors.queryType && (
+            <span style={{ color: 'red', fontSize: '12px' }}>
+              {errors.queryType.message}
+            </span>
+          )}
         </StyledInputContainer>
+
         <StyledInputContainer>
           Message *
           <StyledTextarea />

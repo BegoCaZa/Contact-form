@@ -16,6 +16,21 @@ const StyledFormContainer = styled.div`
   justify-content: center;
   background-color: ${COLORS.white};
   border-radius: 15px;
+
+  @media (min-width: 768px) {
+    width: 690px;
+    margin-top: 20px;
+  }
+`;
+
+const StyledRowContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 20px;
+  }
 `;
 
 const StyledForm = styled.form`
@@ -24,6 +39,10 @@ const StyledForm = styled.form`
   width: 80%;
   gap: 20px;
   padding-bottom: 20px;
+
+  @media (min-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const StyledTitle = styled.h2`
@@ -40,6 +59,10 @@ const StyledInputContainer = styled.div`
   font-size: ${TYPOGRAPHY.bodySMSize};
   font-weight: ${TYPOGRAPHY.bodySMWeightRegular};
   gap: 8px;
+
+  @media (min-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const StyledInput = styled.input`
@@ -62,6 +85,10 @@ const StyledQuaryContainer = styled.div`
   border-radius: 6px;
   padding: 12px;
   align-items: center;
+
+  @media (min-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const StyledQuaryInput = styled.input`
@@ -166,5 +193,6 @@ export {
   StyledQuaryInput,
   StyledCheckboxInput,
   StyledCheckboxInputContainer,
-  StyledErrorMessage
+  StyledErrorMessage,
+  StyledRowContainer
 };

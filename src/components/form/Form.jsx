@@ -13,7 +13,8 @@ import {
   StyledTitle,
   StyledCheckboxInput,
   StyledCheckboxInputContainer,
-  StyledErrorMessage
+  StyledErrorMessage,
+  StyledRowContainer
 } from './form.styles';
 import { useForm } from 'react-hook-form';
 
@@ -29,22 +30,24 @@ const Form = () => {
     <StyledFormContainer>
       <StyledForm onSubmit={handleSubmit(data => console.log(data))}>
         <StyledTitle>Contact Us</StyledTitle>
-        <StyledInputContainer>
-          First Name *
-          <StyledInput
-            {...register('firstName', FORM_VALIDATIONS.NAME)}
-            type='text'
-          />
-          <StyledErrorMessage>{errors.firstName?.message}</StyledErrorMessage>
-        </StyledInputContainer>
-        <StyledInputContainer>
-          Last Name *
-          <StyledInput
-            {...register('lastName', FORM_VALIDATIONS.LASTNAME)}
-            type='text'
-          />
-          <StyledErrorMessage>{errors.lastName?.message}</StyledErrorMessage>
-        </StyledInputContainer>
+        <StyledRowContainer>
+          <StyledInputContainer>
+            First Name *
+            <StyledInput
+              {...register('firstName', FORM_VALIDATIONS.NAME)}
+              type='text'
+            />
+            <StyledErrorMessage>{errors.firstName?.message}</StyledErrorMessage>
+          </StyledInputContainer>
+          <StyledInputContainer>
+            Last Name *
+            <StyledInput
+              {...register('lastName', FORM_VALIDATIONS.LASTNAME)}
+              type='text'
+            />
+            <StyledErrorMessage>{errors.lastName?.message}</StyledErrorMessage>
+          </StyledInputContainer>
+        </StyledRowContainer>
         <StyledInputContainer>
           Email Address *
           <StyledInput
@@ -53,28 +56,32 @@ const Form = () => {
           />
           <StyledErrorMessage>{errors.email?.message}</StyledErrorMessage>
         </StyledInputContainer>
+
         <StyledInputContainer>
           Query Type *
-          <StyledQuaryContainer>
-            <StyledQuaryInput
-              {...register('query', FORM_VALIDATIONS.QUERY)}
-              id='generalQuery'
-              type='radio'
-            />
-            <StyledQuaryLabel htmlFor='generalQuery'>
-              General Query
-            </StyledQuaryLabel>
-          </StyledQuaryContainer>
-          <StyledQuaryContainer>
-            <StyledQuaryInput
-              {...register('query', FORM_VALIDATIONS.QUERY)}
-              id='supportRequest'
-              type='radio'
-            />
-            <StyledQuaryLabel htmlFor='supportRequest'>
-              Support Request
-            </StyledQuaryLabel>
-          </StyledQuaryContainer>
+          <StyledRowContainer>
+            <StyledQuaryContainer>
+              <StyledQuaryInput
+                {...register('query', FORM_VALIDATIONS.QUERY)}
+                id='generalQuery'
+                type='radio'
+              />
+              <StyledQuaryLabel htmlFor='generalQuery'>
+                General Query
+              </StyledQuaryLabel>
+            </StyledQuaryContainer>
+
+            <StyledQuaryContainer>
+              <StyledQuaryInput
+                {...register('query', FORM_VALIDATIONS.QUERY)}
+                id='supportRequest'
+                type='radio'
+              />
+              <StyledQuaryLabel htmlFor='supportRequest'>
+                Support Request
+              </StyledQuaryLabel>
+            </StyledQuaryContainer>
+          </StyledRowContainer>
           <StyledErrorMessage>{errors?.query?.message}</StyledErrorMessage>
         </StyledInputContainer>
 

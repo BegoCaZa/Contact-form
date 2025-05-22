@@ -20,8 +20,9 @@ const messages = {
 };
 
 const patterns = {
-  onlyLetters: /^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+){1,29}$/,
-  email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+  onlyLetters: /^[A-Za-z]+$/,
+  email:
+    /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
 };
 
 const textValidation = {

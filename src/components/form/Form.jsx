@@ -1,3 +1,4 @@
+import { FORM_VALIDATIONS } from '../../constants/form-validations';
 import {
   StyledFormContainer,
   StyledForm,
@@ -19,9 +20,9 @@ const Form = () => {
     control,
     handleSubmit,
     formState: { errors }
-  } = useForm();
+  } = useForm({ mode: 'onBlur' });
 
-  // porque necesito watch aqui y no en los textos
+  // son necesarios para validar el check
   const generalQuary = useWatch({ control, name: 'generalQuary' });
   const supportRequest = useWatch({ control, name: 'supportRequest' });
 
@@ -33,16 +34,7 @@ const Form = () => {
         <StyledInputContainer>
           First Name *
           <StyledInput
-            {...register(
-              'firstName',
-              { required: 'This field is required' },
-              {
-                pattern: {
-                  value: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/,
-                  message: 'Invalid first name'
-                }
-              }
-            )}
+            {...register('firstName', FORM_VALIDATIONS.NAME)}
             type='text'
           />
           <span style={{ color: 'red', fontSize: '12px' }}>

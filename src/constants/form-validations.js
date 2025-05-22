@@ -13,11 +13,14 @@ const messages = {
   },
   consent: {
     required: 'To submit this form, please consent to being contacted'
+  },
+  message: {
+    required: 'Please type your message'
   }
 };
 
 const patterns = {
-  onlyLetters: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/,
+  onlyLetters: /^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+){1,29}$/,
   email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 };
 
@@ -41,6 +44,10 @@ const queryValidation = {
   required: messages.query.required
 };
 
+const messageValidation = {
+  required: messages.message.required
+};
+
 const consentValidation = {
   required: messages.consent.required
 };
@@ -50,5 +57,6 @@ export const FORM_VALIDATIONS = {
   LASTNAME: textValidation,
   EMAIL: emailValidation,
   QUERY: queryValidation,
-  CONSENT: consentValidation
+  CONSENT: consentValidation,
+  MESSAGE: messageValidation
 };

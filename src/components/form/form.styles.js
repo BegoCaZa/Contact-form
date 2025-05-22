@@ -2,6 +2,12 @@ import styled from 'styled-components';
 import { COLORS } from './../../styles/COLORS';
 import { TYPOGRAPHY } from '../../styles/typography';
 
+const StyledErrorMessage = styled.span`
+  color: ${COLORS.red};
+  font-size: 12px;
+  max-width: 220px;
+`;
+
 const StyledFormContainer = styled.div`
   width: 343px;
   display: flex;
@@ -9,14 +15,15 @@ const StyledFormContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${COLORS.white};
-  padding: 10px 20px;
   border-radius: 15px;
 `;
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  width: 80%;
   gap: 20px;
+  padding-bottom: 20px;
 `;
 
 const StyledTitle = styled.h2`
@@ -54,32 +61,33 @@ const StyledQuaryContainer = styled.div`
   border: 1px solid ${COLORS.gray500};
   border-radius: 6px;
   padding: 12px;
+  align-items: center;
 `;
 
-const StyledQuaryInput = styled.input``;
+const StyledQuaryInput = styled.input`
+  display: none;
+
+  &:checked + label::before {
+    background-color: ${COLORS.green600};
+    border: 1px solid ${COLORS.green600};
+  }
+`;
 
 const StyledQuaryLabel = styled.label`
   color: ${COLORS.gray900};
   font-size: ${TYPOGRAPHY.bodySMSize};
   font-weight: ${TYPOGRAPHY.bodySMWeightRegular};
+  line-height: 15px;
   display: flex;
   gap: 8px;
   position: relative;
 
   &::before {
     content: '';
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     border: 1px solid ${COLORS.gray500};
-  }
-  & ${StyledQuaryInput}:checked + label {
-    background-color: ${COLORS.green200};
-    border: 1px solid ${COLORS.green600};
-  }
-  & ${StyledQuaryInput}:checked + label::before {
-    background-color: ${COLORS.green600};
-    border: 1px solid ${COLORS.green600};
   }
 `;
 
@@ -91,16 +99,42 @@ const StyledTextarea = styled.textarea`
   min-height: 120px;
   outline: none;
   &:focus {
-    border-color: #178a78;
+    border: 1.5px solid ${COLORS.green600};
+  }
+`;
+
+const StyledCheckboxInputContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+`;
+
+const StyledCheckboxInput = styled.input`
+  display: none;
+
+  &:checked + label::before {
+    background-color: ${COLORS.green600};
   }
 `;
 
 const StyledCheckboxLabel = styled.label`
+  color: ${COLORS.gray900};
+  font-size: ${TYPOGRAPHY.bodySMSize};
+  font-weight: ${TYPOGRAPHY.bodySMWeightRegular};
+  line-height: 15px;
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 1rem;
-  color: #2d3a3a;
+  gap: 8px;
+  position: relative;
+
+  &::before {
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    border: 2px solid ${COLORS.gray500};
+  }
 `;
 
 const StyledButton = styled.button`
@@ -129,5 +163,8 @@ export {
   StyledCheckboxLabel,
   StyledButton,
   StyledTitle,
-  StyledQuaryInput
+  StyledQuaryInput,
+  StyledCheckboxInput,
+  StyledCheckboxInputContainer,
+  StyledErrorMessage
 };

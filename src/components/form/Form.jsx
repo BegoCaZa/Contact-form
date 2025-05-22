@@ -10,21 +10,19 @@ import {
   StyledQuaryInput,
   StyledCheckboxLabel,
   StyledButton,
-  StyledTitle
+  StyledTitle,
+  StyledCheckboxInput,
+  StyledCheckboxInputContainer,
+  StyledErrorMessage
 } from './form.styles';
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 const Form = () => {
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors }
   } = useForm({ mode: 'onBlur' });
-
-  // son necesarios para validar el check
-  const generalQuary = useWatch({ control, name: 'generalQuary' });
-  const supportRequest = useWatch({ control, name: 'supportRequest' });
 
   console.log(errors);
   return (
@@ -37,55 +35,31 @@ const Form = () => {
             {...register('firstName', FORM_VALIDATIONS.NAME)}
             type='text'
           />
-          <span style={{ color: 'red', fontSize: '12px' }}>
-            {errors.firstName?.message}
-          </span>
+          <StyledErrorMessage>{errors.firstName?.message}</StyledErrorMessage>
         </StyledInputContainer>
         <StyledInputContainer>
           Last Name *
           <StyledInput
-            {...register(
-              'lastName',
-              { required: 'This field is required' },
-              {
-                pattern: {
-                  value: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/,
-                  message: 'Invalid last name'
-                }
-              }
-            )}
+            {...register('lastName', FORM_VALIDATIONS.LASTNAME)}
             type='text'
           />
-          <span style={{ color: 'red', fontSize: '12px' }}>
-            {errors.lastName?.message}
-          </span>
+          <StyledErrorMessage>{errors.lastName?.message}</StyledErrorMessage>
         </StyledInputContainer>
         <StyledInputContainer>
           Email Address *
           <StyledInput
-            {...register(
-              'email',
-              { required: 'Enter a valid email address' },
-              {
-                pattern: {
-                  value: /^\S+@\S+$/i,
-                  message: 'Invalid email address'
-                }
-              }
-            )}
+            {...register('email', FORM_VALIDATIONS.EMAIL)}
             type='text'
           />
-          <span style={{ color: 'red', fontSize: '12px' }}>
-            {errors.email?.message}
-          </span>
+          <StyledErrorMessage>{errors.email?.message}</StyledErrorMessage>
         </StyledInputContainer>
         <StyledInputContainer>
           Query Type *
           <StyledQuaryContainer>
             <StyledQuaryInput
-              {...register('generalQuery')}
+              {...register('query', FORM_VALIDATIONS.QUERY)}
               id='generalQuery'
-              type='checkbox'
+              type='radio'
             />
             <StyledQuaryLabel htmlFor='generalQuery'>
               General Query
@@ -93,36 +67,39 @@ const Form = () => {
           </StyledQuaryContainer>
           <StyledQuaryContainer>
             <StyledQuaryInput
-              {...register('supportRequest')}
+              {...register('query', FORM_VALIDATIONS.QUERY)}
               id='supportRequest'
-              type='checkbox'
+              type='radio'
             />
             <StyledQuaryLabel htmlFor='supportRequest'>
               Support Request
             </StyledQuaryLabel>
           </StyledQuaryContainer>
-          {/* validar */}
-          <input
-            type='hidden'
-            {...register('queryType', {
-              validate: () =>
-                generalQuary || supportRequest || 'Please select a query type'
-            })}
-          />
-          {errors.queryType && (
-            <span style={{ color: 'red', fontSize: '12px' }}>
-              {errors.queryType.message}
-            </span>
-          )}
+          <StyledErrorMessage>{errors?.query?.message}</StyledErrorMessage>
         </StyledInputContainer>
 
         <StyledInputContainer>
           Message *
-          <StyledTextarea />
+          <StyledTextarea
+            type='textarea'
+            {...register('message', FORM_VALIDATIONS.MESSAGE)}
+            id='text'
+          />
+          <StyledErrorMessage>{errors?.message?.message}</StyledErrorMessage>
         </StyledInputContainer>
-        <StyledCheckboxLabel>
-          <input type='checkbox' />I consent to being contacted by the team *
-        </StyledCheckboxLabel>
+
+        <StyledCheckboxInputContainer>
+          <StyledCheckboxInput
+            type='checkbox'
+            {...register('consent', FORM_VALIDATIONS.CONSENT)}
+            id='consentCheckbox'
+          />
+          <StyledCheckboxLabel htmlFor='consentCheckbox'>
+            I consent to being contacted
+          </StyledCheckboxLabel>
+        </StyledCheckboxInputContainer>
+        <StyledErrorMessage>{errors?.consent?.message}</StyledErrorMessage>
+
         <StyledButton type='submit'>Submit</StyledButton>
       </StyledForm>
     </StyledFormContainer>
